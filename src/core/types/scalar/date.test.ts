@@ -1,5 +1,6 @@
+import * as TE from 'fp-ts/TaskEither'
 import { pipe } from 'fp-ts/function'
-import { mapAllE } from '@/config/tests/fixtures'
+import { mapAll } from '@/config/tests/fixtures'
 
 import { dateCodec } from './date'
 
@@ -9,6 +10,7 @@ it('should valid date correctly', () => {
   pipe(
     date,
     dateCodec.decode,
-    mapAllE(result => expect(result).toBe(date)),
+    TE.fromEither,
+    mapAll(result => expect(result).toBe(date)),
   )
 })
