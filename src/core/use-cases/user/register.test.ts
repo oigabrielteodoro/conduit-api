@@ -2,6 +2,8 @@ import * as TE from 'fp-ts/TaskEither'
 import { pipe } from 'fp-ts/function'
 
 import { CreateUser } from '@/core/types/user'
+import { unsafeEmail } from '@/config/tests/fixtures'
+
 import { register, OutsideRegister } from './register'
 
 const mockedRegisterSuccess: OutsideRegister<string> = async (data) => {
@@ -10,7 +12,7 @@ const mockedRegisterSuccess: OutsideRegister<string> = async (data) => {
 
 const data: CreateUser = {
   username: 'johndoe',
-  email: 'johndoe@example.com',
+  email: unsafeEmail('johndoe@example.com'),
   password: 'john123',
 }
 
@@ -19,5 +21,5 @@ it('should register user with success', async () => {
     data,
     register(mockedRegisterSuccess),
     TE.map(result => expect(result).toBe(`User ${data.username} registred with success`)),
-  )()
+  )
 })
