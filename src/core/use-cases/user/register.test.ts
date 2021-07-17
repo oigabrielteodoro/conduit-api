@@ -1,7 +1,7 @@
 import { pipe } from 'fp-ts/function'
 
 import { CreateUser } from '@/core/types/user'
-import { mapAll, unsafeEmail, unsafeSlug } from '@/config/tests/fixtures'
+import { mapAll, unsafeEmail, unsafeSlug, unsafePassword } from '@/config/tests/fixtures'
 
 import { register, OutsideRegister } from './register'
 
@@ -12,7 +12,7 @@ const mockedRegisterSuccess: OutsideRegister<string> = async (data) => {
 const data: CreateUser = {
   username: unsafeSlug('johndoe'),
   email: unsafeEmail('johndoe@example.com'),
-  password: 'john123',
+  password: unsafePassword('john123'),
 }
 
 it('should register user with success', async () => {

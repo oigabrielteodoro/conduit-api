@@ -1,4 +1,5 @@
 export * from './positive'
+export * from './password'
 export * from './email'
 export * from './date'
 export * from './slug'

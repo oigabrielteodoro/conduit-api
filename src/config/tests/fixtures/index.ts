@@ -1,13 +1,17 @@
 
 import * as TE from 'fp-ts/TaskEither'
 import { pipe } from 'fp-ts/function'
-import { Email, Slug } from '@/core/types/scalar'
+import { Email, Password, Slug } from '@/core/types/scalar'
 
 export function unsafeEmail (value: string): Email {
   return value as any
 }
 
 export function unsafeSlug (value: string): Slug {
+  return value as any
+}
+
+export function unsafePassword (value: string): Password {
   return value as any
 }
 
