@@ -18,7 +18,9 @@ export const articleCodec = t.type({
 
 export type Article = t.TypeOf<typeof articleCodec>
 
-export type Articles = {
-  artigles: Article[]
-  articlesCount: number
-}
+export const articlesCodec = t.type({
+  articles: t.array(articleCodec),
+  articlesCount: t.number,
+})
+
+export type Articles = t.TypeOf<typeof articlesCodec>
