@@ -1,9 +1,8 @@
-import * as t from 'io-ts'
 import * as TE from 'fp-ts/TaskEither'
 import { pipe } from 'fp-ts/function'
 import { Email } from '@/core/types/scalar'
 
-export function unsafeEmail (value: string): t.TypeOf<typeof Email> {
+export function unsafeEmail (value: string): Email {
   return value as any
 }
 
