@@ -3,9 +3,9 @@ import { pipe } from 'fp-ts/function'
 import * as TE from 'fp-ts/TaskEither'
 
 import { CreateUser } from '@/core/types/user'
-import { OutsideRegister } from '@/core/use-cases/user/register'
+import { OutsideRegister } from '@/core/use-cases/user/register-user'
 
-import { register } from '@/adapters/user/register-adapter'
+import { register } from '@/adapters/user/register-user-adapter'
 
 const app = express()
 
@@ -28,10 +28,18 @@ app.post('/api/users', async (request: Request, response: Response) => {
     request.body.user,
     register(outsideRegister),
     TE.map(result => response.json(result)),
-    TE.mapLeft(error => response.status(400).json(error.message)),
+    TE.mapLeft(error => response.status(422).json(getError(error.message))),
   )()
 })
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
 })
+
+function getError (errors: string) {
+  return {
+    errors: {
+      body: errors.split(':::'),
+    },
+  }
+}
